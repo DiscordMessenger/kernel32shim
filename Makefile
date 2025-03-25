@@ -11,7 +11,8 @@ MNOSV = $(XL) --minor-os-version $(XL)
 # Give it a subsystem version of 3.10 and an OS version of 1.0
 SSYSVER = $(MJSSV) 3 $(MNSSV) 10 $(MJOSV) 1 $(MNOSV) 0
 
-SOURCES = src/main.c src/forward.c src/hacks.c src/main.def
+HEADERS = src/forward.h
+SOURCES = src/main.c src/forward.c src/hacks.c src/main.def src/reimpl.c
 OBJECTS = $(patsubst src/%.c,bld/%.o,$(SOURCES))
 
 .PHONY: clean
@@ -19,9 +20,9 @@ OBJECTS = $(patsubst src/%.c,bld/%.o,$(SOURCES))
 $(LIBNAME).dll:	$(OBJECTS)
 	gcc -shared $^ -o $@ -O3 -ffreestanding -nodefaultlibs -nostartfiles -lkernel32 -luser32 -Wl,--enable-stdcall-fixup $(SSYSVER) -Wl,--out-implib,lib$(LIBNAME).a
 
-bld/%.o: src/%.c
+bld/%.o: src/%.c $(HEADERS)
 	mkdir -p $(dir $@)
-	gcc -c $^ -o $@
+	gcc -c $< -o $@
 
 bld/%.o: src/%.S
 	mkdir -p $@
@@ -29,4 +30,5 @@ bld/%.o: src/%.S
 
 clean:
 	rm -rf bld
-
+	rm -rf $(LIBNAME).dll
+	rm -rf lib$(LIBNAME).a

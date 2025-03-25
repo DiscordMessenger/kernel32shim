@@ -16,7 +16,7 @@
 		".extern _P_" #name "\n"  \
 		".section .text\n"        \
 		"_" #name ":\n"           \
-		"\tjmp (_P_" #name ")\n"  \
+		"\tjmp *(_P_" #name ")\n" \
 	)
 #include "forward.h"
 #undef EXPORT

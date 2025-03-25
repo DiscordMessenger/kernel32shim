@@ -1,19 +1,19 @@
 // Windows NT 3.1 doesn't define these.
-EXPORT_MANDATORY(GetVersionExA);
-EXPORT_MANDATORY(FreeEnvironmentStringsA);
-EXPORT_MANDATORY(FreeEnvironmentStringsW);
-EXPORT_MANDATORY(GetEnvironmentStringsW);
-EXPORT_MANDATORY(GetStringTypeA);
-EXPORT_MANDATORY(LCMapStringA);
-EXPORT_MANDATORY(CompareStringA);
-EXPORT_MANDATORY(IsValidLocale);
-EXPORT_MANDATORY(GetLocaleInfoA);
-EXPORT_MANDATORY(EnumSystemLocalesA);
-EXPORT_MANDATORY(HeapValidate);
-EXPORT_MANDATORY(HeapCompact);
-EXPORT_MANDATORY(HeapWalk);
-EXPORT_MANDATORY(GetSystemTimeAsFileTime);
-EXPORT_MANDATORY(IsDBCSLeadByteEx);
+EXPORT_OPTIONAL(GetVersionExA);
+EXPORT_OPTIONAL(FreeEnvironmentStringsA);
+EXPORT_OPTIONAL(FreeEnvironmentStringsW);
+EXPORT_OPTIONAL(GetEnvironmentStringsW);
+EXPORT_OPTIONAL(GetStringTypeA);
+EXPORT_OPTIONAL(LCMapStringA);
+EXPORT_OPTIONAL(CompareStringA);
+EXPORT_OPTIONAL(IsValidLocale);
+EXPORT_OPTIONAL(GetLocaleInfoA);
+EXPORT_OPTIONAL(EnumSystemLocalesA);
+EXPORT_OPTIONAL(HeapValidate);
+EXPORT_OPTIONAL(HeapCompact);
+EXPORT_OPTIONAL(HeapWalk);
+EXPORT_OPTIONAL(GetSystemTimeAsFileTime);
+EXPORT_OPTIONAL(IsDBCSLeadByteEx);
 
 // Windows NT 3.1 defines these.
 EXPORT_MANDATORY(SetFilePointer);

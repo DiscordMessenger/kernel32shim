@@ -1,12 +1,13 @@
 #include <stdint.h>
 #include <stddef.h>
 
-size_t strlen(const char* str) 
+void* memset(void* bufptr, int val, size_t size)
 {
-	size_t len = 0;
-	while (str[len])
-		len++;
-	return len;
+	uint8_t* buf = (uint8_t*) bufptr;
+	for (size_t i = 0; i < size; i++)
+		buf[i] = val;
+	
+	return bufptr;
 }
 
 void* memcpy(void* dstptr, const void* srcptr, size_t size)
@@ -18,6 +19,28 @@ void* memcpy(void* dstptr, const void* srcptr, size_t size)
 		dst[i] = src[i];
 	}
 	return dstptr;
+}
+
+int memcmp(const void* ap, const void* bp, size_t size)
+{
+	const uint8_t* a = (const uint8_t*) ap;
+	const uint8_t* b = (const uint8_t*) bp;
+	for(size_t i = 0; i < size; i++)
+	{
+		if(a[i] < b[i])
+			return -1;
+		else if(b[i] < a[i])
+			return 1;
+	}
+	return 0;
+}
+
+size_t strlen(const char* str) 
+{
+	size_t len = 0;
+	while (str[len])
+		len++;
+	return len;
 }
 
 char* strcpy(char* ds, const char* ss)

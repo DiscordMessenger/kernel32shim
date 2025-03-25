@@ -4,12 +4,14 @@
 #include <stddef.h>
 
 #define EXPORT_MANDATORY(name) void* P_ ## name = NULL
-#define EXPORT_OPTIONAL(name) void* P_ ## name = NULL
+#define EXPORT_OPTIONAL(name) extern void PL_ ## name (void); void* P_ ## name = NULL
 
 #include "forward.h"
 
 #undef EXPORT_MANDATORY
 #undef EXPORT_OPTIONAL
+
+static char Initialized = 0;
 
 // note: Returns FALSE always.
 BOOL __attribute__((dllexport)) WINAPI
@@ -44,8 +46,12 @@ DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 	{
 		case DLL_PROCESS_ATTACH:
 		{
-			MessageBoxA(NULL, "Attaching.", NULL, 0);
+			if (Initialized)
+				break;
 			
+			Initialized = 1;
+			
+			MessageBoxA(NULL, "Attaching", NULL, 0);
 			HMODULE hmod = GetModuleHandleA("kernel32.dll");
 			if (!hmod)
 				return ErrorMessage("Could not get module handler for kernel32.dll.", NULL, NULL);
@@ -67,6 +73,23 @@ DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 			
 			#undef EXPORT_MANDATORY
 			#undef EXPORT_OPTIONAL
+			
+			MessageBoxA(NULL, "Attaching Done", NULL, 0);
+			break;
+		}
+		case DLL_PROCESS_DETACH:
+		{
+			MessageBoxA(NULL, "Detaching", NULL, 0);
+			break;
+		}
+		case DLL_THREAD_ATTACH:
+		{
+			MessageBoxA(NULL, "Thread Attaching", NULL, 0);
+			break;
+		}
+		case DLL_THREAD_DETACH:
+		{
+			MessageBoxA(NULL, "Thread Detaching", NULL, 0);
 			break;
 		}
 	}
