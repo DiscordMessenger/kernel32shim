@@ -57,12 +57,14 @@ WINAPI LPCH PL_GetEnvironmentStringsA(VOID)
 }
 */
 
-WINAPI void PL_FreeEnvironmentStringsW()
+WINAPI BOOL PL_FreeEnvironmentStringsW(LPWCH penv)
 {
+	(void) penv;
 }
 
-WINAPI void PL_FreeEnvironmentStringsA()
+WINAPI BOOL PL_FreeEnvironmentStringsA(LPCH penv)
 {
+	(void) penv;
 }
 
 // now the important thing is that we CANNOT allocate anything ourselves.
@@ -110,7 +112,7 @@ WINAPI BOOL PL_IsValidLocale(LCID Locale, DWORD dwFlags)
 	return TRUE;
 }
 
-int PL_GetLocaleInfoA(LCID Locale, LCTYPE lcType, LPSTR lpData, int cchData)
+WINAPI int PL_GetLocaleInfoA(LCID Locale, LCTYPE lcType, LPSTR lpData, int cchData)
 {
 	__unicodeToAnsiTemp[0] = 0;
 	int lci = GetLocaleInfoW(Locale, lcType, __unicodeToAnsiTemp, sizeof __unicodeToAnsiTemp);
@@ -120,7 +122,7 @@ int PL_GetLocaleInfoA(LCID Locale, LCTYPE lcType, LPSTR lpData, int cchData)
 	return lci;
 }
 
-BOOL PL_EnumSystemLocalesA(LOCALE_ENUMPROCA enumProc, DWORD dwFlags)
+WINAPI BOOL PL_EnumSystemLocalesA(LOCALE_ENUMPROCA enumProc, DWORD dwFlags)
 {
 	// assume there is just one locale.
 	enumProc("Kernel32ForwarderLocale");
@@ -128,34 +130,34 @@ BOOL PL_EnumSystemLocalesA(LOCALE_ENUMPROCA enumProc, DWORD dwFlags)
 }
 
 // finally over with this localization crap
-BOOL PL_HeapValidate(HANDLE hHeap, DWORD dwFlags, LPCVOID lpMem)
+WINAPI BOOL PL_HeapValidate(HANDLE hHeap, DWORD dwFlags, LPCVOID lpMem)
 {
 	// all good chief
 	return TRUE;
 }
 
-SIZE_T PL_HeapCompact(HANDLE hHeap, DWORD dwFlags)
+WINAPI SIZE_T PL_HeapCompact(HANDLE hHeap, DWORD dwFlags)
 {
 	// don't know how to
 	SetLastError(NO_ERROR);
 	return 0;
 }
 
-BOOL PL_HeapWalk(HANDLE hHeap, LPPROCESS_HEAP_ENTRY lpProcessHeapEntry)
+WINAPI BOOL PL_HeapWalk(HANDLE hHeap, LPPROCESS_HEAP_ENTRY lpProcessHeapEntry)
 {
 	// no
 	SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
 	return FALSE;
 }
 
-void PL_GetSystemTimeAsFileTime(LPFILETIME lpFileTime)
+WINAPI void PL_GetSystemTimeAsFileTime(LPFILETIME lpFileTime)
 {
 	SYSTEMTIME st;
 	GetSystemTime(&st);
 	SystemTimeToFileTime(&st, lpFileTime);
 }
 
-BOOL PL_IsDBCSLeadByteEx(UINT codePage, BYTE testChar)
+WINAPI BOOL PL_IsDBCSLeadByteEx(UINT codePage, BYTE testChar)
 {
 	return IsDBCSLeadByte(testChar);
 }

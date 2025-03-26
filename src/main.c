@@ -51,7 +51,6 @@ DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 			
 			Initialized = 1;
 			
-			MessageBoxA(NULL, "Attaching", NULL, 0);
 			HMODULE hmod = GetModuleHandleA("kernel32.dll");
 			if (!hmod)
 				return ErrorMessage("Could not get module handler for kernel32.dll.", NULL, NULL);
@@ -73,23 +72,6 @@ DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 			
 			#undef EXPORT_MANDATORY
 			#undef EXPORT_OPTIONAL
-			
-			MessageBoxA(NULL, "Attaching Done", NULL, 0);
-			break;
-		}
-		case DLL_PROCESS_DETACH:
-		{
-			MessageBoxA(NULL, "Detaching", NULL, 0);
-			break;
-		}
-		case DLL_THREAD_ATTACH:
-		{
-			MessageBoxA(NULL, "Thread Attaching", NULL, 0);
-			break;
-		}
-		case DLL_THREAD_DETACH:
-		{
-			MessageBoxA(NULL, "Thread Detaching", NULL, 0);
 			break;
 		}
 	}
