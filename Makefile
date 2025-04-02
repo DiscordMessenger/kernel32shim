@@ -1,6 +1,6 @@
 # This little makefile compiles a kernel32.dll replacement that DiscordMessenger can link against.
 
-LIBNAME = kernec32
+LIBNAME = dimeke32
 
 XL = -Xlinker
 MJSSV = $(XL) --major-subsystem-version $(XL)
