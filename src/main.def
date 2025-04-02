@@ -158,3 +158,5 @@ EXPORTS
 	CreateSemaphoreW
 	InterlockedExchange
 	ReleaseSemaphore
+	CreateSemaphoreA
+	GetExitCodeThread

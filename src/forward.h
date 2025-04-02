@@ -58,8 +58,6 @@ EXPORT_MANDATORY(GetModuleHandleA);
 EXPORT_MANDATORY(GetEnvironmentVariableA);
 EXPORT_MANDATORY(HeapDestroy);
 EXPORT_MANDATORY(HeapCreate);
-EXPORT_MANDATORY(VirtualFree);
-EXPORT_MANDATORY(VirtualAlloc);
 EXPORT_MANDATORY(HeapReAlloc);
 EXPORT_MANDATORY(SetHandleCount);
 EXPORT_MANDATORY(GetFileType);
@@ -152,10 +150,17 @@ EXPORT_MANDATORY(GetSystemInfo);
 EXPORT_MANDATORY(GetTickCount);
 EXPORT_MANDATORY(OutputDebugStringA);
 EXPORT_MANDATORY(ReadConsoleW);
-EXPORT_MANDATORY(VirtualLock);
-EXPORT_MANDATORY(VirtualProtect);
-EXPORT_MANDATORY(VirtualQuery);
 EXPORT_MANDATORY(QueryPerformanceCounter);
 EXPORT_MANDATORY(CreateSemaphoreW);
 EXPORT_MANDATORY(InterlockedExchange);
 EXPORT_MANDATORY(ReleaseSemaphore);
+EXPORT_MANDATORY(CreateSemaphoreA);
+EXPORT_MANDATORY(GetExitCodeThread);
+EXPORT_MANDATORY_DEBUG(VirtualFree);
+EXPORT_MANDATORY_DEBUG(VirtualAlloc);
+EXPORT_MANDATORY_DEBUG(VirtualLock);
+
+// these would normally be handled here but I need to reimplement these
+// in C to mitigate a misfeature of Windows 9x's memory manager.
+//EXPORT_MANDATORY_DEBUG(VirtualProtect);
+//EXPORT_MANDATORY_DEBUG(VirtualQuery);
