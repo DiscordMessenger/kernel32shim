@@ -14,6 +14,7 @@ EXPORT_OPTIONAL(HeapCompact);
 EXPORT_OPTIONAL(HeapWalk);
 EXPORT_OPTIONAL(GetSystemTimeAsFileTime);
 EXPORT_OPTIONAL(IsDBCSLeadByteEx);
+EXPORT_OPTIONAL(InterlockedExchange);
 
 // Windows NT 3.1 defines these.
 EXPORT_MANDATORY(SetFilePointer);
@@ -152,13 +153,34 @@ EXPORT_MANDATORY(OutputDebugStringA);
 EXPORT_MANDATORY(ReadConsoleW);
 EXPORT_MANDATORY(QueryPerformanceCounter);
 EXPORT_MANDATORY(CreateSemaphoreW);
-EXPORT_MANDATORY(InterlockedExchange);
 EXPORT_MANDATORY(ReleaseSemaphore);
 EXPORT_MANDATORY(CreateSemaphoreA);
 EXPORT_MANDATORY(GetExitCodeThread);
-EXPORT_MANDATORY_DEBUG(VirtualFree);
-EXPORT_MANDATORY_DEBUG(VirtualAlloc);
-EXPORT_MANDATORY_DEBUG(VirtualLock);
+EXPORT_MANDATORY(VirtualFree);        // formerly debug
+EXPORT_MANDATORY(VirtualAlloc);       // formerly debug
+EXPORT_MANDATORY(VirtualLock);        // formerly debug
+EXPORT_MANDATORY(CreateEventA);
+EXPORT_MANDATORY(CreateEventW);
+EXPORT_MANDATORY(CreateMutexA);
+EXPORT_MANDATORY(CreateMutexW);
+EXPORT_MANDATORY(FindResourceA);
+EXPORT_MANDATORY(FormatMessageA);
+EXPORT_MANDATORY(GetFileSize);
+EXPORT_MANDATORY(GlobalAlloc);
+EXPORT_MANDATORY(GlobalFree);
+EXPORT_MANDATORY(GlobalLock);
+EXPORT_MANDATORY(GlobalUnlock);
+EXPORT_MANDATORY(LoadResource);
+EXPORT_MANDATORY(LockResource);
+EXPORT_MANDATORY(LocalFree);
+EXPORT_MANDATORY(MulDiv);
+EXPORT_MANDATORY(ReleaseMutex);
+EXPORT_MANDATORY(ResetEvent);
+EXPORT_MANDATORY(SetEvent);
+EXPORT_MANDATORY(SleepEx);
+EXPORT_MANDATORY(TerminateThread);
+EXPORT_MANDATORY(WaitForMultipleObjects);
+EXPORT_MANDATORY(lstrlenW);
 
 // these would normally be handled here but I need to reimplement these
 // in C to mitigate a misfeature of Windows 9x's memory manager.

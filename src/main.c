@@ -125,8 +125,12 @@ BOOL PrepareExport(HMODULE hmod, void** fnout, const char* name, void* fnph)
 	if (!*fnout)
 		*fnout = fnph;
 	
-	if (!*fnout)
-		return ErrorMessage("Could not find mandatory export function ", name, " in the kernel32.dll module.  Let iProgramInCpp know!");
+	if (!*fnout) {
+		if (fnph)
+			return ErrorMessage("Could not find export function ", name, " in the kernel32.dll module, and for some reason the optional replacement doesn't exist.  Let iProgramInCpp know!");
+		else
+			return ErrorMessage("Could not find mandatory export function ", name, " in the kernel32.dll module.  Let iProgramInCpp know!");
+	}
 	
 	return TRUE;
 }

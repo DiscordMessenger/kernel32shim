@@ -160,3 +160,25 @@ EXPORTS
 	ReleaseSemaphore
 	CreateSemaphoreA
 	GetExitCodeThread
+	CreateEventA
+	CreateEventW
+	CreateMutexA
+	CreateMutexW
+	FindResourceA
+	FormatMessageA
+	GetFileSize
+	GlobalAlloc
+	GlobalFree
+	GlobalLock
+	GlobalUnlock
+	LoadResource
+	LockResource
+	LocalFree
+	MulDiv
+	ReleaseMutex
+	ResetEvent
+	SetEvent
+	SleepEx
+	TerminateThread
+	WaitForMultipleObjects
+	lstrlenW

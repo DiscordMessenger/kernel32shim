@@ -1,6 +1,17 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
+WINAPI LONG PL_InterlockedExchange(volatile LONG* target, LONG value)
+{
+	__asm__ __volatile__(
+		"xchgl %0, %1"
+		: "=r"(value), "+m"(*target)
+		: "0"(value)
+		: "memory"
+	);
+	return value;
+}
+
 WINAPI BOOL PL_GetVersionExA(LPOSVERSIONINFOA lpvi)
 {
 	DWORD oldsize = lpvi->dwOSVersionInfoSize;
